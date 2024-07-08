@@ -32,6 +32,13 @@ public class Test extends User implements Serializable {
 		this.subject = subject;
 	}
 
+	public School getSchool(){
+		return school;
+	}
+	public void setSchool(School school){
+		this.school = school;
+	}
+
 	public int getNo(){
 		return no;
 	}

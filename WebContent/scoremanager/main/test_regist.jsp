@@ -65,8 +65,9 @@
 					<div class="mt-2 text-warning">${errors.get("filter")}</div>
 				</div>
 			</form>
-
+			<form action="test_regist_done.jsp" method="post">
 			<c:choose>
+
 				<c:when test="${tests.size()>0}">
 					<div><h2>科目:${subject.name} (${num}回)</h2></div>
 					<table class="table table-hover">
@@ -88,19 +89,18 @@
 								value="${test.point}"</c:if>></td>
 							</tr>
 							<!--登録する学生番号を一覧として送る-->
-							<input type="hidden" name="student_no_set[]" value="${test.student.no}"/>
+							<input type="hidden" name="student_no_set[]" value="${test.student.no}">
 						</c:forEach>
 					</table>
-
-					<input type="hidden" name="subject_cd" value="${subject.cd}" />
-					<input type="hidden" name="num" value="${num}" />
+					<input type="hidden" name="subject_cd" value="${subject.cd}">
+					<input type="hidden" name="num" value="${num}">
 					<input type="submit" value="登録して終了">
 				</c:when>
 				<c:otherwise>
 					<div>成績が存在しませんでした</div>
 				</c:otherwise>
 			</c:choose>
-
+			</form>
         </section>
 	</c:param>
 </c:import>

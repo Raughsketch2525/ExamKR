@@ -11,7 +11,7 @@
 
 	<c:param name="content">
 		<section class="me-4">
-			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">成績参照</h2>
+			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">成績一覧(科目)</h2>
 			<div class="my-2 text-end px-4">
 
 			</div>
@@ -59,14 +59,39 @@
 				<div class="row border mx-3 mb-3 py-2 align-items-center rounded" id="filter">
 					<div class="col-2">
 						<label>学生番号</label>
-						<input type="text" name="no" values="${no}" maxlength="10" placeholder="学生番号を入力してください" required>
+						<input type="text" name="no" value="${no}" maxlength="10" placeholder="学生番号を入力してください" required>
 					</div>
 					<div class="col-4 text-center">
 								<button class="btn btn-secondary" id="filter-button">検索</button>
 					</div>
 				</div>
-				<p>科目情報を選択または学生情報を入力して検索ボタンをクリックしてください</p>
+				<div class="mt-2 text-warning">${errors.get("filter")}</div>
 			</form>
+			<c:choose>
+				<c:when test="${tests.size()>0}">
+					<div><h2>科目:${subject.name} (${num}回)</h2></div>
+					<table class="table table-hover">
+						<tr>
+							<th>入学年度</th>
+							<th>クラス</th>
+							<th>学生番号</th>
+							<th>氏名</th>
+							<th>1回</th>
+							<th>2回</th>
+						</tr>
+						<c:forEach var="test" items="${tests}">
+							<tr>
+								<td>${test.entYear}</td>
+								<td>${test.classNum}</td>
+								<td>${test.studentNo}</td>
+								<td>${test.studentName}</td>
+								<td>${test.getPoint(1)}</td>
+								<td>${test.getPoint(2)}</td>
+							</tr>
+						</c:forEach>
+						</table>
+				</c:when>
+			</c:choose>
 		</section>
 	</c:param>
 </c:import>

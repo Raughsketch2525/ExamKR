@@ -74,6 +74,7 @@ public class TestListSubjectExecuteAction extends Action{
 						Map<String, String>errors = new HashMap<>();
 						errors.put("filter", "入学年度とクラスと科目と回数を選択してください");
 						request.setAttribute("errors", errors);
+
 					}
 
 				}

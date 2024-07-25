@@ -53,6 +53,7 @@
 					<div class="col-2 text-center">
 						<button class="btn btn-secondary" id="filter-button">検索</button>
 					</div>
+					<div class="mt-2 text-warning">${errors.get("filter")}</div>
 				</div>
 			</form>
 
@@ -66,7 +67,7 @@
 								<button class="btn btn-secondary" id="filter-button">検索</button>
 					</div>
 				</div>
-				<div class="mt-2 text-warning">${errors.get("filter")}</div>
+
 			</form>
 			<c:choose>
 				<c:when test="${tests.size()>0}">
@@ -92,7 +93,9 @@
 						</c:forEach>
 						</table>
 				</c:when>
+				<c:otherwise><p>科目情報を選択または学生情報を入力して検索ボタンをクリックしてください</p></c:otherwise>
 			</c:choose>
+
 		</section>
 	</c:param>
 </c:import>

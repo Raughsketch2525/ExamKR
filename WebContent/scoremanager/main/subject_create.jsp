@@ -15,10 +15,13 @@
 			<form action="SubjectCreateExecite.action" method="post">
 
 			<label>科目コード</label>
-				<input type="text" name="cd" values="${cd}" maxlength="3" placeholder="科目コードを入力してください" required>
 			<br>
+				<input type="text" name="cd" value="${cd}" maxlength="3" placeholder="科目コードを入力してください" required>
+			<br>
+			<div class="mt-2 text-warning">${errors.get("f1")}</div>
 			<label>科目名</label>
-				<input type="text" name="name" values="${name}" maxlength="20" placeholder="科目名を入力してください" required>
+			<br>
+				<input type="text" name="name" value="${name}" maxlength="20" placeholder="科目名を入力してください" required>
 			<br>
 			<button name="end">登録</button>
 			<br>

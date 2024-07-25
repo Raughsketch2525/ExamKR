@@ -44,6 +44,6 @@ public class SubjectCreateAction extends Action{
 		request.setAttribute("class_select",class_list);
 
 		//JSPへフォワード
-		request.getRequestDispatcher("student_create.jsp").forward(request,response);
+		request.getRequestDispatcher("subject_create.jsp").forward(request,response);
 	}
 }

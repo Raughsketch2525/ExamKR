@@ -8,8 +8,8 @@
 	<c:param name="scripts"></c:param>
 	<c:param name="content">
 		<section class="me-4">
-			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">学生情報変更</h2>
-			<form action="StudentUpdateExecite.action" method="post">
+			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">科目情報変更</h2>
+			<form action="SubjectUpdateExecite.action" method="post">
 
 				<div class="mb-3">
 					<label class="form-label" for="student_no_input">科目コード</label>
@@ -18,7 +18,9 @@
 				</div>
 
 				<label>科目名</label>
-					<input type="text" name="name" value="${sub_date.name}" maxlength="30" required>
+				<br>
+					<input type="text" name="name" value="${sub_date.name}" maxlength="20" required>
+
 
 				<br>
 				<input type="submit" value="変更">

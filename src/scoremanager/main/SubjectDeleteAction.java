@@ -11,7 +11,7 @@ import dao.SubjectDao;
 import tool.Action;
 
 
-public class SubjectUpdateAction extends Action{
+public class SubjectDeleteAction extends Action{
 	//オーバーライド
 	public void execute(HttpServletRequest request,
 			HttpServletResponse response) throws Exception{
@@ -23,7 +23,7 @@ public class SubjectUpdateAction extends Action{
 		School school = teacher.getSchool();
 
 		//科目の詳細データを取得
-		String cd = request.getParameter("cd");//変更対象の科目コードの取得
+		String cd = request.getParameter("cd");//削除対象の科目コードの取得
 
 		SubjectDao sDao = new SubjectDao();
 //		Subject sub = sDao.get(cd,teacher.getSchool());//変更対象の科目コードデータを取得
@@ -35,7 +35,7 @@ public class SubjectUpdateAction extends Action{
 
 
 		//jspへフォワード
-		request.getRequestDispatcher("subject_update.jsp").forward(request, response);
+		request.getRequestDispatcher("subject_delete.jsp").forward(request, response);
 
 
 	}

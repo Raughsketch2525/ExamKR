@@ -2,23 +2,23 @@ package scoremanager.main;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bean.Student;
 import bean.Subject;
 import bean.Teacher;
-import bean.TestListSubject;
+import bean.TestListStudent;
 import dao.ClassNumDao;
+import dao.StudentDao;
 import dao.SubjectDao;
-import dao.TestListSubjectDao;
+import dao.TestListStudentDao;
 import tool.Action;
 
-public class TestListSubjectExecuteAction extends Action{
+public class TestListStudentExecuteAction extends Action{
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();//セッション
 		Teacher teacher = (Teacher)session.getAttribute("user");
@@ -47,48 +47,35 @@ public class TestListSubjectExecuteAction extends Action{
 		request.setAttribute("ent_year_set", entYearSet);//入学年度リストセット
 		request.setAttribute("subjects", subjects);//科目一覧セット
 
+		String no = request.getParameter("f4");//学生番号の取得
 
-		//リクエストパラメーターの取得
-				String entYearStr = request.getParameter("f1");
-				String classNum = request.getParameter("f2");
-				String subject = request.getParameter("f3");
+		if (no != null){
 
+			if(!no.equals("0")){
+				System.out.println("入力されています。");
+			}
 
-				if (entYearStr != null && classNum !=null && subject !=null){
+			StudentDao stDao = new StudentDao();
+			Student student = stDao.get(no);
+			TestListStudentDao tlstDao = new TestListStudentDao();
+			List<TestListStudent> tests = tlstDao.filter(student);
 
-					if (!entYearStr.equals("0") && !classNum.equals("0") && !subject.equals("0")){
-						System.out.println("全パラメータが指定されています");
+			request.setAttribute("student", student);
+			request.setAttribute("tests", tests);
 
-
-						Subject subject_set = sDao.get(subject, teacher.getSchool());
-
-						int entYear = Integer.parseInt(entYearStr);
-						TestListSubjectDao tlsDao = new TestListSubjectDao();
-						List<TestListSubject> tests = tlsDao.filter(entYear, classNum, subject_set,teacher.getSchool());
-
-
-						request.setAttribute("subject", subject_set);
-						request.setAttribute("tests", tests);
-
-					}else{
-						Map<String, String>errors = new HashMap<>();
-						errors.put("filter", "入学年度とクラスと科目と回数を選択してください");
-						request.setAttribute("errors", errors);
-					}
-
-				}
-
-
-				//JSPへフォワード
-				request.getRequestDispatcher("test_list_subject.jsp").forward(request, response);
+		}
+		//JSPへフォワード
+		request.getRequestDispatcher("test_list_student.jsp").forward(request, response);
 	}
 
-
-
-
-
-
 }
+
+
+
+
+
+
+
 
 
 

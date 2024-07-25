@@ -81,6 +81,10 @@ public class TestRegistAction extends Action {
 				request.setAttribute("subject", subject_set);
 				request.setAttribute("tests", tests);
 
+				request.setAttribute("f1", entYear);
+				request.setAttribute("f2", classNum);
+				request.setAttribute("f3", subject);
+				request.setAttribute("f4", num);
 			}else{
 				Map<String, String>errors = new HashMap<>();
 				errors.put("filter", "入学年度とクラスと科目と回数を選択してください");

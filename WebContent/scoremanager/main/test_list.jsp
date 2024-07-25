@@ -55,11 +55,11 @@
 				</div>
 			</form>
 
-			<form method="get">
+			<form action="TestListStudentExecute.action" method="get">
 				<div class="row border mx-3 mb-3 py-2 align-items-center rounded" id="filter">
 					<div class="col-2">
 						<label>学生番号</label>
-						<input type="text" name="no" values="${no}" maxlength="10" placeholder="学生番号を入力してください" required>
+						<input type="text" name="f4" values="${no}" maxlength="10" placeholder="学生番号を入力してください" required>
 					</div>
 					<div class="col-4 text-center">
 								<button class="btn btn-secondary" id="filter-button">検索</button>

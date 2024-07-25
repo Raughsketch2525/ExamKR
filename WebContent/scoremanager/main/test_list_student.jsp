@@ -11,13 +11,15 @@
 
 	<c:param name="content">
 		<section class="me-4">
-			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">成績管理</h2>
+			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">成績一覧(学生)</h2>
 			<div class="my-2 text-end px-4">
 
 			</div>
-			<form method="get">
+
+			<form action="TestListSubjectExecute.action" method="get">
 				<div class="row border mx-3 mb-3 py-2 align-items-center rounded" id="filter">
 					<div class="col-2">
+					<label>科目情報</label>
 						<label class="form-label" for="student-f1-select">入学年度 </label>
 						<select class="form-select " id="student-f1-select" name="f1">
 							<option value="0">--------</option>
@@ -47,58 +49,53 @@
 							</c:forEach>
 						</select>
 					</div>
-
-                    <div class="col-2">
-						<label class="form-label" for="student-f4-select">回数 </label>
-						<select class="form-select " id="student-f4-select" name="f4">
-							<option value="0">--------</option>
-							<c:forEach var="num" items="${num_set}">
-								<%-- 現在のyearと選択されていたf1が一致していた場合selectedを追記 --%>
-								<option value="${num}" <c:if test="${num==f4}">selected</c:if>>${num}</option>
-							</c:forEach>
-						</select>
-					</div>
-
 					<div class="col-2 text-center">
 						<button class="btn btn-secondary" id="filter-button">検索</button>
 					</div>
-					<div class="mt-2 text-warning">${errors.get("filter")}</div>
-				</div>
-			</form>
-			<form action="TestRegistExecute.action" method="post">
-			<c:choose>
+					</div>
+				</form>
 
+			<form action="TestListStudentExecute.action" method="get">
+				<div class="row border mx-3 mb-3 py-2 align-items-center rounded" id="filter">
+					<div class="col-2">
+						<label>学生番号</label>
+						<input type="text" name="f4" value="${student.no}" maxlength="10" placeholder="学生番号を入力してください" required>
+					</div>
+					<div class="col-4 text-center">
+								<button class="btn btn-secondary" id="filter-button">検索</button>
+					</div>
+				</div>
+
+				<div class="mt-2 text-warning">${errors.get("filter")}</div>
+			</form>
+<!-- 学生別成績表示処理 -->
+			<c:choose>
 				<c:when test="${tests.size()>0}">
-					<div><h2>科目:${subject.name} (${num}回)</h2></div>
+					<div><h2>氏名:${student.name} (${classNum})</h2></div>
 					<table class="table table-hover">
 						<tr>
-							<th>入学年度</th>
-							<th>クラス</th>
-							<th>学生番号</th>
-							<th>氏名</th>
+							<th>科目名</th>
+							<th>科目コード</th>
+							<th>回数</th>
 							<th>点数</th>
+
 						</tr>
 						<c:forEach var="test" items="${tests}">
 							<tr>
-								<td>${test.student.entYear}</td>
-								<td>${test.classNum}</td>
-								<td>${test.student.no}</td>
-								<td>${test.student.name}</td>
-								<td><input type="number" name="point_${test.student.no}" min=0 max=100 <c:if test="${ test.point != -1 }"> value="${test.point}"</c:if>></td>
+								<td>${test.subjectName}</td>
+								<td>${test.subjectCd}</td>
+								<td>${test.num}</td>
+								<td>${test.point}</td>
+
 							</tr>
-							<!--登録する学生番号を一覧として送る-->
-							<input type="hidden" name="student_no_set[]" value="${test.student.no}">
 						</c:forEach>
-					</table>
-					<input type="hidden" name="subject_cd" value="${subject.cd}">
-					<input type="hidden" name="num" value="${num}">
-					<input type="submit" value="登録して終了">
+						</table>
+
 				</c:when>
 				<c:otherwise>
-					<div>成績が存在しませんでした</div>
+				<p>対象の成績データがありません。</p>
 				</c:otherwise>
 			</c:choose>
-			</form>
-        </section>
+		</section>
 	</c:param>
 </c:import>

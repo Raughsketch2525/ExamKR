@@ -18,8 +18,9 @@
 
 			<form action="TestListSubjectExecute.action" method="get">
 				<div class="row border mx-3 mb-3 py-2 align-items-center rounded" id="filter">
+					科目情報
 					<div class="col-2">
-					<label>科目情報</label>
+
 						<label class="form-label" for="student-f1-select">入学年度 </label>
 						<select class="form-select " id="student-f1-select" name="f1">
 							<option value="0">--------</option>
@@ -55,11 +56,11 @@
 				</div>
 			</form>
 
-			<form method="get">
+			<form action="TestListStudentExecute.action" method="get">
 				<div class="row border mx-3 mb-3 py-2 align-items-center rounded" id="filter">
+					学生番号
 					<div class="col-2">
-						<label>学生番号</label>
-						<input type="text" name="no" value="${no}" maxlength="10" placeholder="学生番号を入力してください" required>
+						<input type="text" name="f4" value="${student.no}" maxlength="10" placeholder="学生番号を入力してください" required>
 					</div>
 					<div class="col-4 text-center">
 								<button class="btn btn-secondary" id="filter-button">検索</button>
@@ -69,7 +70,7 @@
 			</form>
 			<c:choose>
 				<c:when test="${tests.size()>0}">
-					<div><h2>科目:${subject.name} (${num}回)</h2></div>
+					<div>科目:${subject.name} (${num}回)</div>
 					<table class="table table-hover">
 						<tr>
 							<th>入学年度</th>
